@@ -13,39 +13,27 @@ class PetsController extends AbstractController
 {
     public function store(FooRequest $request)
     {
-        $data = $this->request->all();
-        //valida os dados
-
-        $data = $request->validate();
-        return $this->response()->json(['message'=>'Data is valid']);
-        //insere dados no banco
-
+        $data = $request->validated();
         $pet = Pet::create([
-            'nome'=>$data['nome'],
+            'nome' => $data['nome'],
             'data_nascimento' => $data['data_nascimento'],
+//            'especie_id' => $data['especie_id'],
         ]);
-
-        //retorna a resposta com sucesso
-
         return $this->response->json([
-            'message'=>'pets cadastrado com sucesso!',
-            'pet'=>$pet
+            'message' => 'Pet cadastrado com sucesso!',
+            'pet' => $pet
         ]);
     }
 
     public function index()
     {
         $pets = Pet::paginate(10);
-
         if ($pets->isEmpty()){
             return $this->response->json([
-                'message'=>'pets não encontrado',
                 'data'=>[],
             ]);
         }
-
         return $this->response->json([
-            'message'=>'pet listado com sucesso!',
             'data'=>$pets,
         ]);
     }
@@ -55,9 +43,7 @@ class PetsController extends AbstractController
         $pet = Pet::find($id);
 
         if($pet){
-
             return $this->response->json([
-                'message'=>'pet encontrado com sucesso!',
                 'data'=>$pet
             ], 200);
         } else{
@@ -70,23 +56,20 @@ class PetsController extends AbstractController
 
     public function destroy($id)
     {
-
         $data = $this->request->all();
 
         $pet = Pet::find($id);
-
         if($pet){
           Pet::destroy($id);
 
             return $this->response->json([
-                'message'=>'Pet removido com sucesso!'
-            ]);
+                'status' => 'ok',
+            ], 200);
         }
             return $this->response->json([
-                'message'=>'Pet não encontrado!'
-            ]);
+                'status' => 'error',
+            ],404);
     }
-
     public function update($id)
     {
         $data = $this->request->all();

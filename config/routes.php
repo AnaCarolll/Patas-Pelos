@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 
 use App\Controller\PetsController;
+use App\Controller\EspeciesController;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/pet', function (){
@@ -20,6 +21,8 @@ Router::addGroup('/pet', function (){
     Router::put('/{id}',[PetsController::class, 'update']);
     Router::delete('/{id}',[\App\Controller\PetsController::class, 'destroy']);
 });
+//rotas de especies
 
+Router::addGroup('/especies', function (){
 
-
+});

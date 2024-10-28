@@ -22,15 +22,18 @@ class FooRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome'=>'requiried|string',
-            'data_nascimento'=>'requiried|date',
+            'nome'=>'required|string|max:255|min:3',
+            'data_nascimento'=>'required|date',
+            'especie_id' => 'nullable|integer',
         ];
     }
     public function messages(): array
     {
         return [
             'nome.required'=>'o campo nome é obrigatorio',
-            'data_nascimento'=>'o campo data de data nascimento é obrigatorio'
+            'nome.string' => 'O campo nome deve ser uma string.',
+            'data_nascimento'=>'o campo data de data nascimento é obrigatorio',
+            'data_nascimento.date' => 'O campo data de nascimento deve ser uma data válida.',
         ];
     }
 }
