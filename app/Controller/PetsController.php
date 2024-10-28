@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\Pet;
+use App\Request\FooRequest;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Annotation\AutoController;
@@ -10,17 +11,13 @@ use Hyperf\Paginator\Paginator;
 use Carbon\carbon;
 class PetsController extends AbstractController
 {
-    public function store()
+    public function store(FooRequest $request)
     {
         $data = $this->request->all();
         //valida os dados
 
-        if(empty($data['nome']) || empty($data['data_nascimento'])){
-            return $this->response->json([
-                'error'=>'invalid data'
-            ], 400);
-        }
-
+        $data = $request->validate();
+        return $this->response()->json(['message'=>'Data is valid']);
         //insere dados no banco
 
         $pet = Pet::create([
