@@ -14,17 +14,19 @@ class PetsController extends AbstractController
     public function store(FooRequest $request)
     {
         $data = $request->validated();
+
         $pet = Pet::create([
             'nome' => $data['nome'],
             'data_nascimento' => $data['data_nascimento'],
 //            'especie_id' => $data['especie_id'],
         ]);
+
         return $this->response->json([
             'message' => 'Pet cadastrado com sucesso!',
             'pet' => $pet
+
         ]);
     }
-
     public function index()
     {
         $pets = Pet::paginate(10);
@@ -37,7 +39,6 @@ class PetsController extends AbstractController
             'data'=>$pets,
         ]);
     }
-
     public function show($id){
 
         $pet = Pet::find($id);
@@ -53,7 +54,6 @@ class PetsController extends AbstractController
             ],404);
         }
     }
-
     public function destroy($id)
     {
         $data = $this->request->all();
