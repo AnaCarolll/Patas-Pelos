@@ -14,14 +14,6 @@ return new class extends Migration
             $table->string('nome');
             $table->date('data_nascimento');
             $table->timestamps();
-//            $table->unsignedBigInteger('especie_id');
-//            $table->foreign('especie_id')
-//                ->references('id')
-//                ->on('especie')
-//                ->onDelete('cascade');
-
-//            $table->foreign('especies_id')
-
         });
 
     }

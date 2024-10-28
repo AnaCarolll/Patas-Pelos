@@ -6,7 +6,7 @@ namespace App\Request;
 
 use Hyperf\Validation\Request\FormRequest;
 
-class FooRequest extends FormRequest
+class CreatePetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

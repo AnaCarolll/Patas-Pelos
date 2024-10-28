@@ -11,7 +11,7 @@ use Hyperf\Paginator\Paginator;
 use Carbon\carbon;
 class PetsController extends AbstractController
 {
-    public function store(FooRequest $request)
+    public function store(CreatePetRequest $request)
     {
         $data = $request->validated();
 
