@@ -3,22 +3,26 @@
 namespace App\Controller;
 
 use App\Model\Pet;
-use App\Request\FooRequest;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\Paginator\Paginator;
 use Carbon\carbon;
+use phpseclib3\Math\PrimeField\Integer;
+use App\Request\CreatePetRequest;
+
 class PetsController extends AbstractController
 {
     public function store(CreatePetRequest $request)
     {
+        if ($request === null) {
+            return $this->response->json(['error' => 'Requisição não pode ser nula.'], 400);
+        }
         $data = $request->validated();
-
         $pet = Pet::create([
             'nome' => $data['nome'],
             'data_nascimento' => $data['data_nascimento'],
-//            'especie_id' => $data['especie_id'],
+            //'especie_id' => $data['especie_id'],
         ]);
 
         return $this->response->json([
@@ -39,7 +43,7 @@ class PetsController extends AbstractController
             'data'=>$pets,
         ]);
     }
-    public function show($id){
+    public function show(int $id){
 
         $pet = Pet::find($id);
 
@@ -54,7 +58,7 @@ class PetsController extends AbstractController
             ],404);
         }
     }
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $data = $this->request->all();
 
@@ -70,17 +74,16 @@ class PetsController extends AbstractController
                 'status' => 'error',
             ],404);
     }
-    public function update($id)
+    public function update(int $id, UpdatePetRequest $request)
     {
-        $data = $this->request->all();
-        $pet = Pet::find($id);
-
+       $data = $request->validate();
+       $pet = Pet::find($id);
         if(!$pet){
             return $this->response->json([
                 'menssage'=>'O pet não foi encontrado!',
             ]);
         }
-//        $pet->nome = $data['nome']?? $pet -> nome;
+        //$pet->nome = $data['nome']?? $pet -> nome;
 
         if(isset($data['data_nascimento'])){
             $data['data_nascimento'] = Carbon::createFromFormat('d/m/Y', $data['data_nascimento'])->format('Y-m-d');
