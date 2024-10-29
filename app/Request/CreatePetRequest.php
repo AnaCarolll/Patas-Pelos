@@ -8,7 +8,6 @@ use Hyperf\Validation\Request\FormRequest;
 
 class CreatePetRequest extends FormRequest
 {
-
     public function authorize(): bool
     {
         return true;

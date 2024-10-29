@@ -10,7 +10,7 @@ use Hyperf\Paginator\Paginator;
 use Carbon\carbon;
 use phpseclib3\Math\PrimeField\Integer;
 use App\Request\CreatePetRequest;
-
+use App\Request\UpdatePetRequest;
 class PetsController extends AbstractController
 {
     public function store(CreatePetRequest $request)
@@ -34,28 +34,29 @@ class PetsController extends AbstractController
     public function index()
     {
         $pets = Pet::paginate(10);
-        if ($pets->isEmpty()){
+        if ($pets->isEmpty()) {
             return $this->response->json([
-                'data'=>[],
+                'data' => [],
             ]);
         }
         return $this->response->json([
-            'data'=>$pets,
+            'data' => $pets,
         ]);
     }
-    public function show(int $id){
+    public function show(int $id)
+    {
 
         $pet = Pet::find($id);
 
-        if($pet){
+        if ($pet) {
             return $this->response->json([
-                'data'=>$pet
+                'data' => $pet
             ], 200);
-        } else{
+        } else {
             return $this->response->json([
                 'status' => 'error',
-                'message' =>'Pet not found!'
-            ],404);
+                'message' => 'Pet not found!'
+            ], 404);
         }
     }
     public function destroy(int $id)
@@ -63,31 +64,32 @@ class PetsController extends AbstractController
         $data = $this->request->all();
 
         $pet = Pet::find($id);
-        if($pet){
-          Pet::destroy($id);
+        if ($pet) {
+            Pet::destroy($id);
 
             return $this->response->json([
                 'status' => 'ok',
             ], 200);
         }
-            return $this->response->json([
-                'status' => 'error',
-            ],404);
+        return $this->response->json([
+            'status' => 'error',
+        ], 404);
     }
     public function update(int $id, UpdatePetRequest $request)
     {
-       $data = $request->validate();
-       $pet = Pet::find($id);
-        if(!$pet){
+        $data = $request->validated();
+        $pet = Pet::find($id);
+        if (!$pet) {
             return $this->response->json([
-                'menssage'=>'O pet não foi encontrado!',
+                'menssage' => 'O pet não foi encontrado!',
             ]);
         }
         //$pet->nome = $data['nome']?? $pet -> nome;
 
-        if(isset($data['data_nascimento'])){
+        if (isset($data['data_nascimento'])) {
             $data['data_nascimento'] = Carbon::createFromFormat('d/m/Y', $data['data_nascimento'])->format('Y-m-d');
         }
-        $pet ->update($data);
+        $pet->update($data);
+
     }
 }
