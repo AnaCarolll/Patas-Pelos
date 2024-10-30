@@ -15,22 +15,17 @@ use Hyperf\DbConnection\Model\Model;
  */
 class Pet extends Model
 {
-
-
-
     protected ?string $table = 'pets';
-
     protected array $fillable = [
         'nome',
         'data_nascimento',
     ];
-
     protected array $casts = [
         'id'=>'integer',
         'nome'=>'string',
-        'data_nascimento'=>'date',
+//        'data_nascimento'=>'date',
     ];
-
+    protected array $hidden=['created_at','updated_at','id'];
     public function especies():BelongsTo{
         return $this->belongsTo(Especie::class, 'especie_id');}
 
