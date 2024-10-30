@@ -14,24 +14,18 @@ use Hyperf\DbConnection\Model\Model;
  */
 class Especie extends Model
 {
-
     protected ?string $table = 'especie';
-
     protected array $fillable = [
         'nome',
         'descricao',
         'especie_id',
     ];
-
     protected array $casts = [
         'id' => 'integer',
         'nome' => 'string',
         'descricao' => 'string',
     ];
-
-
     public function pets(): HasMany{
         return $this->hasMany(Pet::class, 'especie_id', 'id');
     }
-
 }

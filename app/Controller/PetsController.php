@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\Pet;
+use App\Resource\PetResource;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Annotation\AutoController;
@@ -40,7 +41,7 @@ class PetsController extends AbstractController
             ]);
         }
         return $this->response->json([
-            'data' => $pets,
+            'data' => PetResource::collection($pets),
         ]);
     }
     public function show(int $id)
@@ -84,8 +85,6 @@ class PetsController extends AbstractController
                 'menssage' => 'O pet não foi encontrado!',
             ]);
         }
-        //$pet->nome = $data['nome']?? $pet -> nome;
-
         if (isset($data['data_nascimento'])) {
             $data['data_nascimento'] = Carbon::createFromFormat('d/m/Y', $data['data_nascimento'])->format('Y-m-d');
         }
