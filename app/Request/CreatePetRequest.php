@@ -16,7 +16,7 @@ class CreatePetRequest extends FormRequest
     {
         return [
             'nome'=>'required|string|max:255|min:3',
-            'data_nascimento'=>'required|date',
+            'data_nascimento'=>'required|date_format:Y-m-d',
 //            'especie_id' => 'nullable|integer',
 
         ];

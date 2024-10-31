@@ -16,17 +16,7 @@ class PetsController extends AbstractController
     public function store(CreatePetRequest $request)
     {
         $data = $request->validated();
-        if (isset($data['data_nascimento'])) {
-            $dataNascimento = \DateTime::createFromFormat('d/m/Y', $data['data_nascimento']);
-        }
-        $data['data_nascimento'] = $dataNascimento->format('Y-m-d');
-        $pet = Pet::create([
-            'nome' => $data['nome'],
-            'data_nascimento' => $data['data_nascimento'],
-        ]);
-        return $this->response->json([
-            'pet' => $pet
-        ]);
+        $pet = Pet::create($data);
     }
     public function index()
     {
@@ -42,7 +32,6 @@ class PetsController extends AbstractController
     }
     public function show(int $id)
     {
-
         $pet = Pet::find($id);
 
         if ($pet) {
