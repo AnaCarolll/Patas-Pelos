@@ -16,7 +16,6 @@ class PetResource extends JsonResource
         return [
             'nome'=> $this->nome,
             'data_nascimento'=>$this->data_nascimento,
-
             ];
     }
 }

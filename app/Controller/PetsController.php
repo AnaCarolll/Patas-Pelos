@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Model\Pet;
 use App\Request\DeletPetRequest;
+use App\Request\ListaEspecificoRequest;
+use App\Resource\ShowResource;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Annotation\AutoController;
@@ -31,20 +33,11 @@ class PetsController extends AbstractController
             'data' => PetResource::collection($pets),
         ]);
     }
-    public function show(int $id)
+    public function show(ListaEspecificoRequest $request)
     {
-        $pet = Pet::find($id);
-
-        if ($pet) {
-            return $this->response->json([
-                'data' => $pet
-            ], 200);
-        } else {
-            return $this->response->json([
-                'status' => 'error',
-                'message' => 'Pet not found!'
-            ], 404);
-        }
+        $data = $request->validated();
+        $pet = Pet::find($data['id']);
+        return new ShowResource($pet);
     }
     public function destroy(DeletPetRequest $request )
     {
@@ -68,6 +61,5 @@ class PetsController extends AbstractController
             $data['data_nascimento'] = $dataNascimento->format('Y-m-d');
         }
         $pet->update($data);
-
     }
 }
