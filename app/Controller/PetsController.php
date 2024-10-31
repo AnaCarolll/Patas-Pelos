@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\Pet;
+use App\Request\DeletPetRequest;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Annotation\AutoController;
@@ -45,21 +46,11 @@ class PetsController extends AbstractController
             ], 404);
         }
     }
-    public function destroy(int $id)
+    public function destroy(DeletPetRequest $request )
     {
-        $data = $this->request->all();
-
-        $pet = Pet::find($id);
-        if ($pet) {
-            Pet::destroy($id);
-
-            return $this->response->json([
-                'status' => 'ok',
-            ], 200);
-        }
-        return $this->response->json([
-            'status' => 'error',
-        ], 404);
+        $data = $request->validated();
+        $pet = Pet::find($data['id']);
+        $pet->delete();
     }
     public function update(int $id, UpdatePetRequest $request)
     {
