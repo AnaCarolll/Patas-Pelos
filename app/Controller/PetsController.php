@@ -29,9 +29,8 @@ class PetsController extends AbstractController
                 'data' => [],
             ]);
         }
-        return $this->response->json([
-            'data' => PetResource::collection($pets),
-        ]);
+        return PetResource::collection($pets);
+
     }
     public function show(ListaEspecificoRequest $request)
     {
