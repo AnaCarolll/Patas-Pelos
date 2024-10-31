@@ -44,7 +44,7 @@ class PetsController extends AbstractController
         $pet = Pet::find($data['id']);
         $pet->delete();
     }
-    public function update(int $id, UpdatePetRequest $request)
+    public function update(UpdatePetRequest $request, int $id)
     {
         $data = $request->validated();
         $pet = Pet::find($id);
