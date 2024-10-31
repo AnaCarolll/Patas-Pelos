@@ -18,7 +18,7 @@ class UpdatePetRequest extends FormRequest implements ValidatesWhenResolved
         return [
             'id'=>'exists:pets,id',
             'nome' => 'required|string|max:255',
-            'data_nascimento' => 'required|date_format:d/m/Y',
+            'data_nascimento'=>'required|date_format:Y-m-d',
         ];
     }
     public function messages(): array

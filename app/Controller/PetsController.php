@@ -48,17 +48,6 @@ class PetsController extends AbstractController
     {
         $data = $request->validated();
         $pet = Pet::find($id);
-        if (!$pet) {
-            return $this->response->json([
-                'menssage' => 'O pet não foi encontrado!',
-            ]);
-        }
-        if (isset($data['data_nascimento'])) {
-            $dataNascimento = \DateTime::createFromFormat('d/m/Y', $data['data_nascimento']);
-        }
-        if($dataNascimento !== false){
-            $data['data_nascimento'] = $dataNascimento->format('Y-m-d');
-        }
         $pet->update($data);
     }
 }
