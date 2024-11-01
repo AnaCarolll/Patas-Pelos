@@ -4,13 +4,8 @@ namespace App\Resource;
 
 use Hyperf\Resource\Json\JsonResource;
 use Illuminate\Http\Request;
-class PetResource extends JsonResource
+class PetListagemResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array
-     */
     public function toArray():array
     {
         return [
