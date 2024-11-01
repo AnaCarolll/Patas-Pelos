@@ -6,6 +6,7 @@ use App\Model\Pet;
 use App\Request\DeletPetRequest;
 use App\Request\ListaEspecificoRequest;
 use App\Resource\ShowResource;
+use App\Resource\UpdateResource;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Annotation\AutoController;
@@ -49,5 +50,6 @@ class PetsController extends AbstractController
         $data = $request->validated();
         $pet = Pet::find($id);
         $pet->update($data);
+        return new UpdateResource($pet);
     }
 }
