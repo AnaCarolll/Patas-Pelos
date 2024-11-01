@@ -13,10 +13,8 @@ class EspeciesController extends AbstractController
 {
     public function store(FooRequest $request)
     {
-        $data = $this->response->json();
-        $especie = Especie::create([
-
-        ]);
+//        $data = $this->response->json();
+//        $especie = Especie::create([]);
 
     }
 }
