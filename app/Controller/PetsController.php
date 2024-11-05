@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Model\Pet;
-use App\Request\DeletPetRequest;
+use App\Request\DeletePetRequest;
 use App\Request\ListaEspecificoRequest;
 use App\Request\ListaPetsRequest;
 use App\Resource\saidasDeDadosPets;
@@ -37,7 +37,7 @@ class PetsController extends AbstractController
         $pet = Pet::find($data['id']);
         return new saidasDeDadosPets($pet);
     }
-    public function destroy(DeletPetRequest $request )
+    public function destroy(DeletePetRequest $request )
     {
         $data = $request->validated();
         $pet = Pet::find($data['id']);

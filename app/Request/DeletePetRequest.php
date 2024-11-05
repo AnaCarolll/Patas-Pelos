@@ -6,7 +6,7 @@ namespace App\Request;
 
 use Hyperf\Validation\Request\FormRequest;
 
-class DeletPetRequest extends FormRequest
+class DeletePetRequest extends FormRequest
 {
     public function authorize(): bool
     {
