@@ -1,4 +1,6 @@
 #!/bin/sh
 echo "Iniciando projeto"
 
-php /var/www/bin/hyperf.php start
+composer install
+
+php bin/hyperf.php start

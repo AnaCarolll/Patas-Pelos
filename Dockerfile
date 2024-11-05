@@ -45,9 +45,10 @@ WORKDIR /opt/www
 # Composer Cache
 # COPY ./composer.* /opt/www/
 # RUN composer install --no-dev --no-scripts
+COPY ./ /opt/www/
 
 COPY . /opt/www
 RUN composer install --no-dev -o && php bin/hyperf.php
 
-CMD ["/var/www/hyper.sh"]
+
 EXPOSE 9501
