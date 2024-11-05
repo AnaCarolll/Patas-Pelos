@@ -9,6 +9,7 @@ class saidasDeDadosPets extends JsonResource
     public function toArray(): array
     {
         return[
+            'id'=>$this->id,
             'nome'=>$this->nome,
             'data_nascimento'=>$this->data_nascimento
         ];

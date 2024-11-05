@@ -26,6 +26,6 @@ class Especie extends Model
         'descricao' => 'string',
     ];
     public function pets(): HasMany{
-        return $this->hasMany(Pet::class, 'especie_id', 'id');
+        return $this->hasMany(Pet::class);
     }
 }
