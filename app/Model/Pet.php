@@ -23,10 +23,11 @@ class Pet extends Model
     protected array $casts = [
         'id'=>'integer',
         'nome'=>'string',
-//        'data_nascimento'=>'date',
+        'data_nascimento'=>'date',
     ];
-    protected array $hidden=['created_at','updated_at','id'];
-    public function especies():BelongsTo{
-        return $this->belongsTo(Especie::class, 'especie_id');}
+    protected array $hidden=[
+        'created_at',
+        'updated_at'
+    ];
 
 }
