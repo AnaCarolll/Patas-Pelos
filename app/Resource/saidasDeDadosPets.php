@@ -1,18 +1,16 @@
 <?php
 
-declare(strict_types=1);
 namespace App\Resource;
 
-use http\Env\Request;
 use Hyperf\Resource\Json\JsonResource;
 
-class ShowResource extends JsonResource
+class saidasDeDadosPets extends JsonResource
 {
     public function toArray(): array
     {
-        return [
+        return[
             'nome'=>$this->nome,
-            'data_nascimento'=>$this->data_nascimento,
+            'data_nascimento'=>$this->data_nascimento
         ];
     }
 }

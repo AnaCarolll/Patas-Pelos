@@ -6,7 +6,7 @@ use App\Model\Pet;
 use App\Request\DeletPetRequest;
 use App\Request\ListaEspecificoRequest;
 use App\Request\ListaPetsRequest;
-use App\Resource\CadastraPetResource;
+use App\Resource\saidasDeDadosPets;
 use App\Resource\ShowResource;
 use App\Resource\UpdateResource;
 use Hyperf\HttpServer\Contract\ResponseInterface;
@@ -23,19 +23,19 @@ class PetsController extends AbstractController
     {
         $data = $request->validated();
         $pet = Pet::create($data);
-        return new CadastraPetResource($pet);
+        return new saidasDeDadosPets($pet);
     }
     public function index()
     {
         $pets = Pet::paginate(10);
-        return PetListagemResource::collection($pets->items());
+        return saidasDeDadosPets::collection($pets->items());
 
     }
     public function show(ListaEspecificoRequest $request)
     {
         $data = $request->validated();
         $pet = Pet::find($data['id']);
-        return new ShowResource($pet);
+        return new saidasDeDadosPets($pet);
     }
     public function destroy(DeletPetRequest $request )
     {
@@ -48,6 +48,6 @@ class PetsController extends AbstractController
         $data = $request->validated();
         $pet = Pet::find($id);
         $pet->update($data);
-        return new UpdateResource($pet);
+        return new saidasDeDadosPets($pet);
     }
 }
