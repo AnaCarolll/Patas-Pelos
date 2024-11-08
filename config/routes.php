@@ -27,4 +27,5 @@ Router::addGroup('/pet', function (){
 
 Router::addGroup('/especies', function (){
     Router::post('',[EspeciesController::class,'store']);
+    Router::delete('/{id}',[EspeciesController::class,'destroy']);
 });

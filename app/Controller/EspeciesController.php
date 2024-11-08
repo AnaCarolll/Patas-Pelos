@@ -20,4 +20,9 @@ class EspeciesController extends AbstractController
         return new saidasDeDadosEspecies($especie);
 
     }
+
+    public function destroy()
+    {
+
+    }
 }
