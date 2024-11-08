@@ -14,7 +14,7 @@ use Hyperf\DbConnection\Model\Model;
  */
 class Especie extends Model
 {
-    protected ?string $table = 'especie';
+    protected ?string $table = 'especies';
     protected array $fillable = [
         'nome',
         'descricao',
