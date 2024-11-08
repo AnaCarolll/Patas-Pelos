@@ -12,9 +12,9 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('descricao');
             $table->string('nome');
+            $table->timestamps();
         });
     }
-
     public function down(): void
     {
     }

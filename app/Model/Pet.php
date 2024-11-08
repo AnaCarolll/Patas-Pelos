@@ -7,7 +7,6 @@ namespace App\Model;
 use Hyperf\Database\Model\Relations\BelongsTo;
 use Hyperf\DbConnection\Model\Model;
 
-
 /**
  * @property int $id
  * @property string $nome
@@ -29,5 +28,8 @@ class Pet extends Model
         'created_at',
         'updated_at'
     ];
+    public function especies():BelongsTo{
+        return $this->belongsTo(Especie::class);
+    }
 
 }

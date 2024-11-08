@@ -18,7 +18,6 @@ class Especie extends Model
     protected array $fillable = [
         'nome',
         'descricao',
-        'especie_id',
     ];
     protected array $casts = [
         'id' => 'integer',
