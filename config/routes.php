@@ -23,9 +23,8 @@ Router::addGroup('/pet', function (){
 
 });
 //rotas de especiesclear
-
-
 Router::addGroup('/especies', function (){
     Router::post('',[EspeciesController::class,'store']);
     Router::delete('',[EspeciesController::class,'destroy']);
+    Router::get('/especifico',[EspeciesController::class,'show']);
 });
