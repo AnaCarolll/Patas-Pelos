@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Model\Especie;
 use App\Request\CreateEspecieRequest;
+use App\Request\DeleteEspecieRequest;
 use App\Request\FooRequest;
 use App\Resource\saidasDeDadosEspecies;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -21,8 +22,10 @@ class EspeciesController extends AbstractController
 
     }
 
-    public function destroy()
+    public function destroy(DeleteEspecieRequest $request)
     {
-
+        $data = $request->validated();
+        $especie = Especie::find($data['id']);
+        $especie->delete();
     }
 }

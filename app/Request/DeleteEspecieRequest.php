@@ -16,7 +16,7 @@ class DeleteEspecieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id'=>'required|inter|exists:species,id',
+            'id'=>'required|integer|exists:especies,id',
         ];
     }
 }
