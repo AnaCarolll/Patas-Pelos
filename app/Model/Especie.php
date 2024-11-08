@@ -24,6 +24,11 @@ class Especie extends Model
         'nome' => 'string',
         'descricao' => 'string',
     ];
+
+    protected array $hidden=[
+        'created_at',
+        'updated_at',
+    ];
     public function pets(): HasMany{
         return $this->hasMany(Pet::class);
     }
