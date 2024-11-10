@@ -9,6 +9,7 @@ use App\Request\CreateEspecieRequest;
 use App\Request\DeleteEspecieRequest;
 use App\Request\FooRequest;
 use App\Request\ListaEspecieEspecificaRequest;
+use App\Request\UpdateEspecieRequest;
 use App\Resource\saidasDeDadosEspecies;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
@@ -33,9 +34,15 @@ class EspeciesController extends AbstractController
         $especie = Especie::find($data['id']);
         return new saidasDeDadosEspecies($especie);
     }
-
     public function index(){
         $especies = Especie::paginate(10);
         return saidasDeDadosEspecies::collection($especies->items());
+    }
+    public function update(UpdateEspecieRequest $request, int $id)
+    {
+        $data = $request->validated();
+        $especie = Especie::find($id);
+        $especie->update($data);
+        return new saidasDeDadosEspecies($especie);
     }
 }

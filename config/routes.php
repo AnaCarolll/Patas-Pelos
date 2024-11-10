@@ -27,4 +27,5 @@ Router::addGroup('/especies', function (){
     Router::delete('',[EspeciesController::class,'destroy']);
     Router::get('/especifico',[EspeciesController::class,'show']);
     Router::get('',[EspeciesController::class, 'index']);
+    Router::put('/{id}',[EspeciesController::class, 'update']);
 });

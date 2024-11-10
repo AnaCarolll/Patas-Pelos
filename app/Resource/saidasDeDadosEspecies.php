@@ -15,4 +15,10 @@ class saidasDeDadosEspecies extends JsonResource
             'descricao'=>$this->descricao,
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'id.exists' => 'id não encontrado'
+        ];
+    }
 }
