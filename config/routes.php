@@ -20,11 +20,11 @@ Router::addGroup('/pet', function (){
     Router::post('',[PetsController::class, 'store']); //cadastro de pets
     Router::put('/{id}',[PetsController::class, 'update']);
     Router::delete('',[PetsController::class, 'destroy']);
-
 });
-//rotas de especiesclear
+//rotas de especies
 Router::addGroup('/especies', function (){
     Router::post('',[EspeciesController::class,'store']);
     Router::delete('',[EspeciesController::class,'destroy']);
     Router::get('/especifico',[EspeciesController::class,'show']);
+    Router::get('',[EspeciesController::class, 'index']);
 });

@@ -22,18 +22,20 @@ class EspeciesController extends AbstractController
         return new saidasDeDadosEspecies($especie);
 
     }
-
     public function destroy(DeleteEspecieRequest $request)
     {
         $data = $request->validated();
         $especie = Especie::find($data['id']);
         $especie->delete();
     }
-
     public function show (ListaEspecieEspecificaRequest $request){
         $data = $request->validated();
         $especie = Especie::find($data['id']);
         return new saidasDeDadosEspecies($especie);
     }
 
+    public function index(){
+        $especies = Especie::paginate(10);
+        return saidasDeDadosEspecies::collection($especies->items());
+    }
 }
