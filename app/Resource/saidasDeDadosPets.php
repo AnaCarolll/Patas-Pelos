@@ -11,7 +11,8 @@ class saidasDeDadosPets extends JsonResource
         return[
             'id'=>$this->id,
             'nome'=>$this->nome,
-            'data_nascimento'=>$this->data_nascimento
+            'data_nascimento'=>$this->data_nascimento,
+            'especie_id'=>$this->especie_id
         ];
     }
 }

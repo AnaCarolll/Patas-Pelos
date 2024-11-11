@@ -23,6 +23,7 @@ class PetsController extends AbstractController
     {
         $data = $request->validated();
         $pet = Pet::create($data);
+        $pet->especies_id = $data['especie_id'];
         return new saidasDeDadosPets($pet);
     }
     public function index()

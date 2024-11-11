@@ -18,6 +18,7 @@ class Pet extends Model
     protected array $fillable = [
         'nome',
         'data_nascimento',
+        'especie_id'
     ];
     protected array $casts = [
         'id'=>'integer',
@@ -29,7 +30,7 @@ class Pet extends Model
         'updated_at'
     ];
     public function especies():BelongsTo{
-        return $this->belongsTo(Especie::class);
+        return $this->belongsTo(Especie::class, 'especie_id');
     }
 
 }

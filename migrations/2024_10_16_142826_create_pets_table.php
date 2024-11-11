@@ -13,6 +13,8 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('nome');
             $table->date('data_nascimento');
+            $table->unsignedBigInteger('especie_id')->nullable();
+            $table->foreign('especie_id')->references('id')->on('especies')->onDelete('cascade');
             $table->timestamps();
         });
 
