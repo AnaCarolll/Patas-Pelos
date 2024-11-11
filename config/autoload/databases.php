@@ -14,7 +14,7 @@ use function Hyperf\Support\env;
 return [
     'default' => [
         'driver' => env('DB_DRIVER', 'mysql'),
-        'host' => env('DB_HOST','db', 'localhost'),
+        'host' => env('DB_HOST','db'),
         'database' => env('DB_DATABASE', 'patas_e_pelos'),
         'port' => env('DB_PORT', 3306),
         'username' => env('DB_USERNAME', 'ana'),
