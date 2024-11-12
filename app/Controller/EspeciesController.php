@@ -18,14 +18,14 @@ class EspeciesController extends AbstractController
         $data = $request->validated();
         $especie = Especie::create($data);
         return new EspeciesResource($especie);
-
+        return $this->response->json(['data' => new EspeciesResource($especie)], 201);
     }
     public function destroy(DeleteEspecieRequest $request)
     {
         $data = $request->validated();
         $especie = Especie::find($data['id']);
         $especie->delete();
-        return $this->response->json([],200);
+        return response()->json([],200);
     }
     public function show (ListaEspecieRequest $request, int $id)
     {
@@ -42,6 +42,6 @@ class EspeciesController extends AbstractController
         $data = $request->validated();
         $especie = Especie::find($id);
         $especie->update($data);
-        return new EspeciesResource($especie);
+        return $this->response->json(['data' => new Especie($especie)], 200);
     }
 }

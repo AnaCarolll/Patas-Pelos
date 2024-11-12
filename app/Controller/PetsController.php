@@ -12,6 +12,8 @@ use App\Resource\UpdateResource;
 use App\Resource\PetListagemResource;
 use App\Request\CreatePetRequest;
 use App\Request\UpdatePetRequest;
+use Hyperf\HttpServer\Contract\ResponseInterface;
+
 class PetsController extends AbstractController
 {
     public function store(CreatePetRequest $request)
@@ -19,6 +21,7 @@ class PetsController extends AbstractController
         $data = $request->validated();
         $pet = Pet::create($data);
         return new PetsResource($pet);
+        return $this->response->json(['data' => new PetsResource($pet)], 201);
     }
     public function index()
     {
@@ -30,20 +33,20 @@ class PetsController extends AbstractController
         $data = $request->validated();
         $pet = Pet::find($id);
         return new PetsResource($pet);
+
     }
     public function destroy(DeletePetRequest $request )
     {
         $data = $request->validated();
         $pet = Pet::find($data['id']);
         $pet->delete();
-        return response()->json([],200);
     }
     public function update(UpdatePetRequest $request, int $id)
     {
         $data = $request->validated();
         $pet = Pet::find($id);
         $pet->update($data);
-        return response()->json([],200);
+        return $this->response->json(['data' => new PetsResource($pet)], 200);
     }
 
 }
