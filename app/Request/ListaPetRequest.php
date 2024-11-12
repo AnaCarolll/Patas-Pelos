@@ -6,7 +6,7 @@ namespace App\Request;
 
 use Hyperf\Validation\Request\FormRequest;
 
-class ListaEspecificoRequest extends FormRequest
+class ListaPetRequest extends FormRequest
 {
     public function authorize(): bool
     {

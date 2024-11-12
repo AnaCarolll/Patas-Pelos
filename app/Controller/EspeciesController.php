@@ -7,12 +7,9 @@ namespace App\Controller;
 use App\Model\Especie;
 use App\Request\CreateEspecieRequest;
 use App\Request\DeleteEspecieRequest;
-use App\Request\FooRequest;
-use App\Request\ListaEspecieEspecificaRequest;
+use App\Request\ListaEspecieRequest;
 use App\Request\UpdateEspecieRequest;
-use App\Resource\saidasDeDadosEspecies;
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Contract\ResponseInterface;
+use App\Resource\especiesResource;
 
 class EspeciesController extends AbstractController
 {
@@ -20,7 +17,7 @@ class EspeciesController extends AbstractController
     {
         $data = $request->validated();
         $especie = Especie::create($data);
-        return new saidasDeDadosEspecies($especie);
+        return new EspeciesResource($especie);
 
     }
     public function destroy(DeleteEspecieRequest $request)
@@ -28,21 +25,23 @@ class EspeciesController extends AbstractController
         $data = $request->validated();
         $especie = Especie::find($data['id']);
         $especie->delete();
+        return $this->response->json([],200);
     }
-    public function show (ListaEspecieEspecificaRequest $request){
+    public function show (ListaEspecieRequest $request, int $id)
+    {
         $data = $request->validated();
-        $especie = Especie::find($data['id']);
-        return new saidasDeDadosEspecies($especie);
+        $especie = Especie::find($id);
+        return new EspeciesResource($especie);
     }
     public function index(){
         $especies = Especie::paginate(10);
-        return saidasDeDadosEspecies::collection($especies->items());
+        return EspeciesResource::collection($especies->items());
     }
     public function update(UpdateEspecieRequest $request, int $id)
     {
         $data = $request->validated();
         $especie = Especie::find($id);
         $especie->update($data);
-        return new saidasDeDadosEspecies($especie);
+        return new EspeciesResource($especie);
     }
 }

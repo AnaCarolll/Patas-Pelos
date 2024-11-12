@@ -17,12 +17,12 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_USER: ana
-      MYSQL_PASSWORD: novasenha
-      MYSQL_DATABASE: patas_e_pelos
-      MYSQL_ROOT_PASSWORD: qualquer
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3306:3306"
+      - "${DB_PORT}:3306"
 
 networks:
   default:

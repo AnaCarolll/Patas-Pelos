@@ -4,17 +4,12 @@ namespace App\Controller;
 
 use App\Model\Pet;
 use App\Request\DeletePetRequest;
-use App\Request\ListaEspecificoRequest;
+use App\Request\ListaPetRequest;
 use App\Request\ListaPetsRequest;
-use App\Resource\saidasDeDadosPets;
+use App\Resource\PetsResource;
 use App\Resource\ShowResource;
 use App\Resource\UpdateResource;
-use Hyperf\HttpServer\Contract\ResponseInterface;
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Annotation\AutoController;
-use Hyperf\Paginator\Paginator;
 use App\Resource\PetListagemResource;
-use phpseclib3\Math\PrimeField\Integer;
 use App\Request\CreatePetRequest;
 use App\Request\UpdatePetRequest;
 class PetsController extends AbstractController
@@ -23,33 +18,32 @@ class PetsController extends AbstractController
     {
         $data = $request->validated();
         $pet = Pet::create($data);
-        $pet->especies_id = $data['especie_id'];
-        return new saidasDeDadosPets($pet);
+        return new PetsResource($pet);
     }
     public function index()
     {
         $pets = Pet::paginate(10);
-        return saidasDeDadosPets::collection($pets->items());
-
+        return PetsResource::collection($pets->items());
     }
-    public function show(ListaEspecificoRequest $request)
+    public function show(ListaPetRequest $request, int $id)
     {
         $data = $request->validated();
-        $pet = Pet::find($data['id']);
-        return new saidasDeDadosPets($pet);
+        $pet = Pet::find($id);
+        return new PetsResource($pet);
     }
     public function destroy(DeletePetRequest $request )
     {
         $data = $request->validated();
         $pet = Pet::find($data['id']);
         $pet->delete();
+        return response()->json([],200);
     }
     public function update(UpdatePetRequest $request, int $id)
     {
         $data = $request->validated();
         $pet = Pet::find($id);
         $pet->update($data);
-        return new saidasDeDadosPets($pet);
+        return response()->json([],200);
     }
 
 }

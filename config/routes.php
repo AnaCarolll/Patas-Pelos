@@ -16,16 +16,18 @@ use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/pet', function (){
     Router::get('',[PetsController::class, 'index']);  //lista todos
-    Router::get('/especifico',[PetsController::class, 'show']);  //lista um em especifico
+    Router::get('/{id}',[PetsController::class, 'show']);  //lista um em especifico
     Router::post('',[PetsController::class, 'store']); //cadastro de pets
     Router::put('/{id}',[PetsController::class, 'update']);
     Router::delete('',[PetsController::class, 'destroy']);
 });
-//rotas de especies
+
+
+
 Router::addGroup('/especies', function (){
     Router::post('',[EspeciesController::class,'store']);
     Router::delete('',[EspeciesController::class,'destroy']);
-    Router::get('/especifico',[EspeciesController::class,'show']);
+    Router::get('/{id}',[EspeciesController::class,'show']);
     Router::get('',[EspeciesController::class, 'index']);
     Router::put('/{id}',[EspeciesController::class, 'update']);
 });

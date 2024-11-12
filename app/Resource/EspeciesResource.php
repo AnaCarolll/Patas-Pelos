@@ -4,7 +4,7 @@ namespace App\Resource;
 
 use Hyperf\Resource\Json\JsonResource;
 
-class saidasDeDadosEspecies extends JsonResource
+class EspeciesResource extends JsonResource
 {
 
     public function toArray(): array
