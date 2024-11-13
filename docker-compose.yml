@@ -1,4 +1,7 @@
 version: '3'
+volumes:
+  patas_e_pelos-db-data:
+    driver: local
 services:
   hyperf-skeleton:
     container_name: patas_e_pelos
@@ -15,12 +18,14 @@ services:
       - SCAN_CACHEABLE=false
   db:
     image: mysql:latest
+    container_name: patas_e_pelos-db
+    volumes:
+      - patas_e_pelos-db-data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_USER: ana
-      MYSQL_PASSWORD: novasenha
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: patas_e_pelos
-      MYSQL_ROOT_PASSWORD: novasenha
+      MYSQL_TCP_PORT: 3306
     ports:
       - "3306:3306"
 
