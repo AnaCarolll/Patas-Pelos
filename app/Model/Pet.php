@@ -29,7 +29,7 @@ class Pet extends Model
         'created_at',
         'updated_at'
     ];
-    public function especies():BelongsTo{
+    public function especie():BelongsTo{
         return $this->belongsTo(Especie::class, 'especie_id');
     }
 

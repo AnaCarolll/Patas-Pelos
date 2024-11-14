@@ -21,7 +21,6 @@ class PetsController extends AbstractController
         $data = $request->validated();
         $pet = Pet::create($data);
         return new PetsResource($pet);
-        return $this->response->json(['data' => new PetsResource($pet)], 201);
     }
     public function index()
     {
@@ -46,7 +45,7 @@ class PetsController extends AbstractController
         $data = $request->validated();
         $pet = Pet::find($id);
         $pet->update($data);
-        return $this->response->json(['data' => new PetsResource($pet)], 200);
+        return new PetsResource($pet);
     }
 
 }
