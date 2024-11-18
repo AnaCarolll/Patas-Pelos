@@ -14,7 +14,7 @@ class PetsResource extends JsonResource
             'id'=>$this->id,
             'nome'=>$this->nome,
             'data_nascimento'=>$this->data_nascimento,
-            'especies'=>$this->especie->nome
+//            'especies'=>$this->especie->nome
         ];
     }
 }

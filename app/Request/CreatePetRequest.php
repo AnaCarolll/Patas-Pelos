@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Request;
 
 use Hyperf\Validation\Request\FormRequest;
-
+use Psr\Container\ContainerInterface;
 class CreatePetRequest extends FormRequest
 {
+
+
     public function authorize(): bool
     {
         return true;
@@ -15,19 +17,25 @@ class CreatePetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome'=>'required|string|max:255|min:3',
-            'data_nascimento'=>'required|date_format:Y-m-d|before_or_equal:today',
-            'especie_id' => 'required|integer',
-
+            'nome' => 'required',
+            'data_nascimento' => 'required|date',
+            'especie_id' => 'required|integer|exists:especies,id',
         ];
     }
     public function messages(): array
     {
         return [
-            'nome.required'=>'o campo nome é obrigatorio',
-            'nome.string' => 'O campo nome deve ser uma string.',
-            'data_nascimento'=>'o campo data de data nascimento é obrigatorio',
-            'data_nascimento.date' => 'O campo data de nascimento deve ser uma data válida.',
+           'nome.required' => 'não pode ser vazio vei 🤨'
         ];
+    }
+    protected function failedValidation($validator)
+    {
+        $response = di()->get(Response::class);
+
+        // Retornar mensagens personalizadas em formato JSON
+        throw new ValidationException($validator, $response->json([
+            'message' => 'Os dados fornecidos são inválidos.',
+            'errors' => $validator->errors()
+        ], 422));
     }
 }

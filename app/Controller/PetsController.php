@@ -18,6 +18,8 @@ class PetsController extends AbstractController
 {
     public function store(CreatePetRequest $request)
     {
+        var_dump($request);
+        die();
         $data = $request->validated();
         $pet = Pet::create($data);
         return new PetsResource($pet);
@@ -47,5 +49,4 @@ class PetsController extends AbstractController
         $pet->update($data);
         return new PetsResource($pet);
     }
-
 }
