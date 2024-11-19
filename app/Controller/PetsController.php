@@ -12,16 +12,23 @@ use App\Resource\UpdateResource;
 use App\Resource\PetListagemResource;
 use App\Request\CreatePetRequest;
 use App\Request\UpdatePetRequest;
+use App\Service\PetService;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 
 class PetsController extends AbstractController
 {
+    protected $petService;
+
+    public function __construct(PetService $petService)
+    {
+        $this->petService = $petService;
+    }
     public function store(CreatePetRequest $request)
     {
-        var_dump($request);
-        die();
+//        var_dump($request);
+//        die();
         $data = $request->validated();
-        $pet = Pet::create($data);
+        $pet = $this->petService->createPet($data);
         return new PetsResource($pet);
     }
     public function index()

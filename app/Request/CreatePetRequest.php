@@ -28,14 +28,4 @@ class CreatePetRequest extends FormRequest
            'nome.required' => 'não pode ser vazio vei 🤨'
         ];
     }
-    protected function failedValidation($validator)
-    {
-        $response = di()->get(Response::class);
-
-        // Retornar mensagens personalizadas em formato JSON
-        throw new ValidationException($validator, $response->json([
-            'message' => 'Os dados fornecidos são inválidos.',
-            'errors' => $validator->errors()
-        ], 422));
-    }
 }

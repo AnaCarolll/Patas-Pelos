@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dcb40238703d5a6e92362056e0be697d",
+    "content-hash": "b7fbf09a077f8b7718c81c5e0333749d",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -7329,16 +7329,16 @@
         },
         {
             "name": "hyperf/testing",
-            "version": "v3.1.42",
+            "version": "v3.1.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hyperf/testing.git",
-                "reference": "ad2eaee6aadc9156ac3da853bb56f89e97542234"
+                "reference": "3cba517358bc980cd63b5a4a6c21978ec75f9814"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/testing/zipball/ad2eaee6aadc9156ac3da853bb56f89e97542234",
-                "reference": "ad2eaee6aadc9156ac3da853bb56f89e97542234",
+                "url": "https://api.github.com/repos/hyperf/testing/zipball/3cba517358bc980cd63b5a4a6c21978ec75f9814",
+                "reference": "3cba517358bc980cd63b5a4a6c21978ec75f9814",
                 "shasum": ""
             },
             "require": {
@@ -7384,7 +7384,7 @@
                 "testing"
             ],
             "support": {
-                "source": "https://github.com/hyperf/testing/tree/v3.1.42"
+                "source": "https://github.com/hyperf/testing/tree/v3.1.44"
             },
             "funding": [
                 {
@@ -7396,7 +7396,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-09-25T02:54:12+00:00"
+            "time": "2024-10-23T10:24:12+00:00"
         },
         {
             "name": "mockery/mockery",
