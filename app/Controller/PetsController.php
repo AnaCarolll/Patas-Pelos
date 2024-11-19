@@ -46,8 +46,7 @@ class PetsController extends AbstractController
     public function destroy(DeletePetRequest $request )
     {
         $data = $request->validated();
-        $pet = Pet::find($data['id']);
-        $pet->delete();
+        $pet = $this->petService->deletePet($data);
     }
     public function update(UpdatePetRequest $request, int $id)
     {

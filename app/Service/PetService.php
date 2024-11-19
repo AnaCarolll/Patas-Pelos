@@ -11,5 +11,9 @@ class PetService
     public function createPet(array $data):Pet{
         return $pet = Pet::create($data);
     }
-
+    public function deletePet(int $id):void
+    {
+        $per = Pet::find($id);
+        $pet->delte();
+    }
 }
