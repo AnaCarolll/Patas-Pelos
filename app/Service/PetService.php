@@ -23,4 +23,9 @@ class PetService
         $pet->update($data);
         return $pet;
     }
+
+    public function listPets(int $perPage = 10)
+    {
+        return Pet::paginate($perPage);
+    }
 }

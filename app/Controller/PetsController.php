@@ -33,7 +33,7 @@ class PetsController extends AbstractController
     }
     public function index()
     {
-        $pets = Pet::paginate(10);
+        $pets = $this->petService->listPets(10);
         return PetsResource::collection($pets->items());
     }
     public function show(ListaPetRequest $request, int $id)
