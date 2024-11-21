@@ -13,7 +13,7 @@ class PetService
     }
     public function deletePet(int $id):void
     {
-        $per = Pet::find($id);
-        $pet->delte();
+        $pet = Pet::find($id);
+        $pet->delete();
     }
 }
