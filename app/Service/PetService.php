@@ -16,4 +16,11 @@ class PetService
         $pet = Pet::find($id);
         $pet->delete();
     }
+
+    public function updatePet(int $id, array $data):Pet
+    {
+        $pet = Pet::find($id);
+        $pet->update($data);
+        return $pet;
+    }
 }

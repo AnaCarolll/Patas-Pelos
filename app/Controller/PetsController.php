@@ -52,8 +52,7 @@ class PetsController extends AbstractController
     public function update(UpdatePetRequest $request, int $id)
     {
         $data = $request->validated();
-        $pet = Pet::find($id);
-        $pet->update($data);
+        $pet= $this->petService->updatePet($id, $data);
         return new PetsResource($pet);
     }
 }
