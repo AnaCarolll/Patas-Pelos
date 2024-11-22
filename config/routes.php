@@ -19,7 +19,7 @@ Router::addGroup('/pet', function (){
     Router::get('/{id}',[PetsController::class, 'show']);  //lista um em especifico
     Router::post('',[PetsController::class, 'store']); //cadastro de pets
     Router::put('/{id}',[PetsController::class, 'update']);
-    Router::delete('',[PetsController::class, 'destroy']);
+    Router::delete('/{id}',[PetsController::class, 'destroy']);
 });
 
 

@@ -43,11 +43,10 @@ class PetsController extends AbstractController
         return new PetsResource($pet);
 
     }
-    public function destroy(DeletePetRequest $request)
+    public function destroy(DeletePetRequest $request, int $id)
     {
         $data = $request->validated();
-        $id = $data['id'];
-        $this->petService->deletePet($id);
+        $this->petService->deletePet($id, $data);
     }
     public function update(UpdatePetRequest $request, int $id)
     {

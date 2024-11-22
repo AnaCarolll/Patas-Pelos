@@ -15,7 +15,7 @@ class DeletePetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|integer|exists:pets,id',
+            'id' => 'exists:pets,id',
         ];
     }
 }
