@@ -9,7 +9,7 @@ use App\Model\Pet;
 class PetService
 {
     public function createPet(array $data):Pet{
-        return $pet = Pet::create($data);
+        return Pet::create($data);
     }
     public function deletePet(int $id)
     {

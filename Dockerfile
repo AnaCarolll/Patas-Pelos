@@ -39,7 +39,7 @@ RUN set -ex \
     # ---------- clear works ----------
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
     && echo -e "\033[42;37m Build Completed :).\033[0m\n"
-
+RUN apk add --no-cache ext-redis  php-amqplib
 WORKDIR /opt/www
 
 # Composer Cache
