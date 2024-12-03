@@ -1,38 +1,73 @@
 <template>
-  <q-page padding>
-    <q-form>
-      <div class="row q-mb-md">
-      <q-input model-value="" class="col-8" label="Nome" outlined />
+  <q-page padding id="fundoDaPagina" class="flex flex-center">
+    <q-form class="q-pa-md flex flex-center">
+      <div class="text-center">
+        <h4  id="my-fonty">Cadastro de novo Pet</h4>
       </div>
-      <div class="row q-col-gutter-x-md">
-      <q-input class="col-8 q-mb-md" model-value="" label="Data de Nascimento" outlined >
-        <template v-slot:append>
-          <q-icon name="event" class="cursor-pointer">
-            <q-popup-proxy>
-              <q-date model-value=""/>
-            </q-popup-proxy>
-          </q-icon>
-        </template>
-      </q-input>
-      <q-select class="col-8 q-mb-md" model-value=""
-                label="Especie"
-                outlined
-                :options="[
-                  'Cachorro',
-                  'Gato',
-                  'Outro'
-                ]"
-      />
+
+      <div class="q-pa-md flex flex-column items-center col-12 col-md-6" id="fundoFormulario">
+
+        <q-input model-value="" label="Nome" outlined class="q-mb-md full-width" />
+        <q-input mask="##/##/####" model-value="" label="Data de Nascimento" outlined class="q-mb-md full-width">
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy>
+                <q-date model-value="bornDate" mask="DD/MM/yyyy" />
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
+        <q-select model-value="" label="Espécie" outlined class="q-mb-md full-width"
+                  :options="[
+                    'Cachorro',
+                     'Gato',
+                     'Outro'
+                     ]"
+        />
+          <q-btn label="Cadastrar" id="buttonCadastrar"/>
+
       </div>
-    <div class="col-8">
-      <q-btn label="Cadastrar"/>
-    </div>
 
     </q-form>
+   <div class="imgPatinhas">
+     <img src="../../img/imagemPatinhas.png">
+   </div>
   </q-page>
 </template>
+
+
+
 <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
 })
 </script>
+<style>
+.imgPatinhas{
+
+
+}
+#buttonCadastrar{
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  margin:0 auto;
+}
+#my-fonty {
+  text-align: center;
+}
+.text-center {
+  font-family: "Itim", serif;
+  font-weight: 400;
+  font-style: normal;
+
+}
+#fundoFormulario {
+  background-color: rgba(255, 255, 255, 0.4); /* Cor branca com 80% de opacidade */
+  border-radius: 30px
+;
+}
+#fundoDaPagina{
+  background-color:#6781E6;
+}
+</style>
