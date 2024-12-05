@@ -9,10 +9,10 @@ const routes: RouteRecordRaw[] = [
         path: '', component: () => import('pages/IndexPage.vue')
       },
       {
-        path:'/cadastro',
+        path:'cadastro',
         component: () => import('pages/FormNewPet.vue')
       }
-      ],
+    ],
   },
   {
     path: '/:catchAll(.*)*',

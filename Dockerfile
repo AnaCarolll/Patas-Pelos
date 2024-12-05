@@ -1,55 +1,58 @@
-# Default Dockerfile
-#
-# @link     https://www.hyperf.io
-# @document https://hyperf.wiki
-# @contact  group@hyperf.io
-# @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
-
+# Base image
 FROM hyperf/hyperf:8.3-alpine-v3.19-swoole
 LABEL maintainer="Hyperf Developers <group@hyperf.io>" version="1.0" license="MIT" app.name="Hyperf"
 
-##
-# ---------- env settings ----------
-##
-# --build-arg timezone=Asia/Shanghai
-ARG timezone
+## ---------- Environment Variables ----------
+ARG timezone=Asia/Shanghai
 
-ENV TIMEZONE=${timezone:-"Asia/Shanghai"} \
+ENV TIMEZONE=${timezone} \
     APP_ENV=prod \
-    SCAN_CACHEABLE=(true)
+    SCAN_CACHEABLE=true
 
-# update
+## ---------- Install Dependencies ----------
 RUN set -ex \
-    # show php version and extensions
+    # Show PHP version and extensions
     && php -v \
     && php -m \
     && php --ri swoole \
-    #  ---------- some config ----------
+    # Configure PHP settings
     && cd /etc/php* \
-    # - config PHP
     && { \
         echo "upload_max_filesize=128M"; \
         echo "post_max_size=128M"; \
         echo "memory_limit=1G"; \
         echo "date.timezone=${TIMEZONE}"; \
     } | tee conf.d/99_overrides.ini \
-    # - config timezone
+    # Set timezone
     && ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime \
     && echo "${TIMEZONE}" > /etc/timezone \
-    # ---------- clear works ----------
+    # Install required PHP extensions and dependencies
+    && apk add --no-cache php-redis \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
+    && mkdir -p /opt/www \
     && echo -e "\033[42;37m Build Completed :).\033[0m\n"
-RUN apk add --no-cache ext-redis  php-amqplib
+
+## ---------- Working Directory ----------
 WORKDIR /opt/www
 
-# Composer Cache
-# COPY ./composer.* /opt/www/
-# RUN composer install --no-dev --no-scripts
+## ---------- Copy Application Files ----------
 COPY ./ /opt/www/
 
-COPY . /opt/www
-RUN composer install --no-dev -o
-RUN php bin/hyperf.php
+## ---------- Composer Installation ----------
+RUN curl -sS https://getcomposer.org/installer | php \
+    && php composer.phar install --no-dev -o
 
-
+## ---------- Expose Ports ----------
 EXPOSE 9501
+
+## ---------- Migrate Both Databases ----------
+# This script will migrate both production and testing databases when the container is built.
+RUN set -ex \
+    && if [ "$APP_ENV" = "production" ]; then \
+        php bin/hyperf.php migrate:fresh --force; \
+    else \
+        php bin/hyperf.php migrate:fresh --env=testing --force; \
+    fi
+
+## ---------- Run the Hyperf Application ----------
+CMD ["php", "bin/hyperf.php", "start"]

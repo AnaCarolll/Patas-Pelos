@@ -1,71 +1,20 @@
 <template>
   <q-page padding id="fundoDaPagina" class="">
-<div class="my-fonty">
-  <h4>
-    Cadastrar Pet
-  </h4>
-</div>
-   <q-form
-     class="q-pa-md flex flex-column items-center justify-center">
-      <div
-        class="q-pa-md flex flex-column items-center col-12 col-md-6"
-        id="fundoFormulario">
-        <q-input
-          v-model="nome"
-          label="Nome"
-          outlined class="q-mb-md full-width"
-        />
-        <q-input
-          v-model="bornDateFormatted"
-          label="Data de Nascimento"
-          outlined
-          class="q-mb-md full-width">
-
-          <template v-slot:append>
-            <q-icon
-              name="event"
-              class="cursor-pointer">
-              <q-popup-proxy >
-                <q-date
-                  v-model="bornDate"
-                  mask="DD/MM/yyyy"
-                  @update:model-value="updateBornDate"/>
-              </q-popup-proxy>
-            </q-icon>
-          </template>
-        </q-input>
-        <q-select
-          v-model="especie"
-          label="Espécie"
-          outlined
-          class="q-mb-md full-width"
-          :options="['Cachorro', 'Gato', 'Outro']"
-        />
-        <q-btn
-          label="Cadastrar"
-          class="buttonCadastrar q-mt-md"
-        />
+    <div class="my-fonty">
+      <h4>
+        Cadastrar Pet
+      </h4>
+    </div>
+    <q-form  method="POST" action="/pet" class="q-pa-md flex flex-column items-center justify-center">
+      <div class="q-pa-md flex flex-column items-center col-12 col-md-6" id="fundoFormulario">
+        <q-input ref="petName" v-model= "petName" label="Nome" outlined class="q-mb-md full-width"/>
+        <q-input mask="##/##/####" v-model="petDataDeNascimento" label="Data de Nascimento" outlined class="q-mb-md full-width"/>
+        <q-select model-value="" v-model="especie" label="Espécie" outlined class="q-mb-md full-width" :options="['Cachorro', 'Gato', 'Outro']" />
+        <q-btn label="Cadastrar" class="buttonCadastrar q-mt-md" @click="envio"/>
       </div>
     </q-form>
   </q-page>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      nome: '',
-      bornDate: '',
-      bornDateFormatted: '',
-      especie: '',
-    };
-  },
-  methods: {
-    updateBornDate(value) {
-      this.bornDateFormatted = this.$q.date.formatDate(value, 'DD/MM/YYYY');
-    },
-  },
-};
-</script>
 <style>
 .buttonCadastrar{
   background-color: #ffffff;
@@ -92,3 +41,24 @@ export default {
   background-color:#6781E6;
 }
 </style>
+<script>
+  export default {
+    data() {
+      return {
+        petName: '',
+        petDataDeNascimento:'',
+        especie:''
+      };
+    },
+    methods: {
+      envio() {
+        const formData = {
+          name:this.petName,
+          dataDeNacimento:this.petDataDeNascimento,
+          especie: this.especie
+        }
+        alert(JSON.stringify(formData,null,2))
+      }
+    }
+  }
+</script>

@@ -6,9 +6,11 @@ use PHPUnit\Framework\TestCase;
 use App\Service\PetService;
 use App\Model\Pet;
 use Mockery;
+use
 
 class PetServiceTest extends TestCase
 {
+    use RefreshDatabase;
     public function testCreatePet()
     {
         $petService = new PetService();

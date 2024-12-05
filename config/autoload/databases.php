@@ -38,4 +38,8 @@ return [
             ],
         ],
     ],
+    'db_testing' => env('DB_TESTING_DATABASE', 'db_testing'),
+    'migrations' => [
+        'directory' => BASE_PATH . '/migrations',  // Caminho das migrações
+    ],
 ];

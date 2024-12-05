@@ -47,14 +47,13 @@ ClassLoader::init();
 $container = require BASE_PATH . '/config/container.php';
 
 run(function () {
-    Db::getConnection()->statement('CREATE DATABASE IF NOT EXISTS `' . config('db_testing') . '`');
+  //  Db::getConnection()->statement('CREATE DATABASE IF NOT EXISTS `' . config('db_testing') . '`');
 });
 
 $config = $container->get(ConfigInterface::class);
 
-
-if ($config->get('app_env') !== 'pipeline') {
-    $config->set('databases.default.database', config('db_testing'));
+if ($config->get('app_env') === 'dev' || $config->get('app_env') === 'testing') {
+    $config->set('databases.default.database','testing');
 }
 
 $container->get(ApplicationInterface::class);
