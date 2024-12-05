@@ -14,8 +14,8 @@ use function Hyperf\Support\env;
 return [
     'default' => [
         'driver' => env('DB_DRIVER', 'mysql'),
-        'host' => env('DB_HOST', 'localhost'),
-        'database' => env('DB_DATABASE', 'patas_e_pelos'),
+        'host' => env('DB_HOST','localhost'),
+        'database' => env('DB_DATABASE', 'db'),
         'port' => env('DB_PORT', 3306),
         'username' => env('DB_USERNAME', 'root'),
         'password' => env('DB_PASSWORD', ''),
@@ -37,5 +37,9 @@ return [
                 'inheritance' => 'Model',
             ],
         ],
+    ],
+    'db_testing' => env('DB_TESTING_DATABASE', 'db_testing'),
+    'migrations' => [
+        'directory' => BASE_PATH . '/migrations',  // Caminho das migrações
     ],
 ];

@@ -3,7 +3,7 @@
     "username": "ana",
     "password": "novasenha",
     "database":"patas_e_pelos",
-    "host": "localhost",
+    "host": "db",
     "port":3306,
     "dialect": "mysql"
   }

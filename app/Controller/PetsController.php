@@ -3,61 +3,55 @@
 namespace App\Controller;
 
 use App\Model\Pet;
+use App\Request\DeletePetRequest;
+use App\Request\ListaPetRequest;
+use App\Request\ListaPetsRequest;
+use App\Resource\PetsResource;
+use App\Resource\ShowResource;
+use App\Resource\UpdateResource;
+use App\Resource\PetListagemResource;
+use App\Request\CreatePetRequest;
+use App\Request\UpdatePetRequest;
+use App\Service\PetService;
 use Hyperf\HttpServer\Contract\ResponseInterface;
-use Hyperf\HttpServer\Contract\RequestInterface;
+
 class PetsController extends AbstractController
 {
-    public function register(RequestInterface $request, ResponseInterface $response)
+    protected $petService;
+
+    public function __construct(PetService $petService)
     {
-        $data = $request->all();
-
-
-//valida os dados
-
-        if(empty($data['nome']) || empty($data['data_nascimento'])){
-            return $response->json([
-                'error' => 'invalid data'
-            ], 400);
-        }
-
-//insere dados no banco
-
-        $pets = Pet::create([
-            'nome' => $data['nome'],
-            'data_nascimento' => $data['data_nascimento'],
-        ]);
-
-//retorna a resposta com sucesso
-
-        return $response->json([
-            'message' => 'pets cadastrado com sucesso!',
-            'pets' => $pets
-        ]);
+        $this->petService = $petService;
     }
-    public function list(RequestInterface $request, ResponseInterface $response)
+    public function store(CreatePetRequest $request)
     {
-        $data = $request->all();
-
-        return $response->json([
-            'message' => 'pet listado com sucesso!',
-        ]);
+//        var_dump($request);
+//        die();
+        $data = $request->validated();
+        $pet = $this->petService->createPet($data);
+        return new PetsResource($pet);
     }
-
-    public function delete(RequestInterface $request, ResponseInterface $response)
+    public function index()
     {
-        $data = $request->all();
-
-        return $response->json([
-            'message' => 'pet removido com sucesso!',
-        ]);
+        $pets = $this->petService->listPets(10);
+        return PetsResource::collection($pets->items());
     }
-
-    public function update(RequestInterface $request, ResponseInterface $response)
+    public function show(ListaPetRequest $request, int $id)
     {
-        $data = $request -> all();
+        $data = $request->validated();
+        $pet = Pet::find($id);
+        return new PetsResource($pet);
 
-        return $response ->json([
-            'message' => 'pet atualizado com sucesso!',
-        ]);
+    }
+    public function destroy(DeletePetRequest $request, int $id)
+    {
+        $data = $request->validated();
+        $this->petService->deletePet($id, $data);
+    }
+    public function update(UpdatePetRequest $request, int $id)
+    {
+        $data = $request->validated();
+        $pet= $this->petService->updatePet($id, $data);
+        return new PetsResource($pet);
     }
 }

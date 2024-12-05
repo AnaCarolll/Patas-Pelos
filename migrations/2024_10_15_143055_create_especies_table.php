@@ -6,21 +6,15 @@ use Hyperf\Database\Migrations\Migration;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('especie', function (Blueprint $table) {
+        Schema::create('especies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descricao');
             $table->string('nome');
+            $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
     }
